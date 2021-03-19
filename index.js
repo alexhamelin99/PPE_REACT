@@ -1,11 +1,12 @@
-var express = require("express")
-var bodyParser = require("body-parser")
-var mongoose = require("mongoose")
+const mongoose = require("mongoose")
 
-const app = express()
+const uri ="mongodb+srv://LorenzoRipault:1234@cluster0.8dnfs.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+mongoose.connect(uri);
 
-app.get("/",(req,res)=>{
-    res.send("Hello from server")
-}).listen(3000);
 
-console.log("Listening on PORT 3000");
+
+mongoose.connection.once('open',function(){
+    console.log('Conncetion has been made');
+}).on('error',function(error){
+    console.log('Connection error:',error)
+});
